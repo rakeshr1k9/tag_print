@@ -110,7 +110,6 @@ class _HomepageState extends State<Homepage> {
             return pw.Center(
               child: pw.Column(
                 children: [
-                  pw.Text('------------------------------------', style: const pw.TextStyle(fontSize: 8)),
                   pw.Text('${tag.branchname}- ${tag.receiptno}', style: pw.TextStyle(fontSize: 12, fontWeight: pw.FontWeight.bold)),
                   pw.Row(
                     mainAxisSize: pw.MainAxisSize.max,
@@ -134,6 +133,7 @@ class _HomepageState extends State<Homepage> {
                   ),
                   pw.Text(tag.mobileno.toString(), style: const pw.TextStyle(fontSize: 10)),
                   pw.Text('${tag.servicelist} - ${tag.note}', style: const pw.TextStyle(fontSize: 10)),
+                  pw.Text('------------------------------------', style: const pw.TextStyle(fontSize: 8)),
                 ],
               )
             );
@@ -141,6 +141,19 @@ class _HomepageState extends State<Homepage> {
         ),
       );
     }
+
+    doc.addPage(
+      pw.Page(
+        pageFormat: pdfpagesize,
+        build: (pw.Context context) {
+          return pw.Center(
+              child: pw.Padding(
+                padding: const pw.EdgeInsets.fromLTRB(2, 5, 2, 5)
+              )
+          );
+        },
+      ),
+    );
 
     /// open Preview Screen
     Navigator.push(context, MaterialPageRoute(builder:
