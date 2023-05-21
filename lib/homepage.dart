@@ -33,7 +33,7 @@ class _HomepageState extends State<Homepage> {
   final String _totalItemsSelectedValue = numbersList.first;
   final String _tagsToPrintSelectedValue = numbersList.first;
 
-  static const List<String> serviceList = <String>['-','D','d/r','c/r','Dye','Dye/B','Dye/Bo','D+d/r','D+st'];
+  static const List<String> serviceList = <String>['-','D','d/r','D+d/r','D+st','D+S','Dye','Dye/B','Dye/Pb','Dye+D','Dye+D+d/r','c/r','RP'];
 
   String? _serviceSelectedValue;
 
@@ -90,13 +90,12 @@ class _HomepageState extends State<Homepage> {
   void _displayPdf() {
     final doc = pw.Document();
     const pdfpagesize = PdfPageFormat(50.8 * (72.0/25.4), 25.4 * (72.0/25.4), marginAll: 0);
-    const lastpagesize = PdfPageFormat(50.8 * (72.0/25.4), 15 * (72.0/25.4), marginAll: 0);
 
     finalTagList.clear();
 
     for(var tagDataf in _tagdatalist){
       for(int i=1; i<=tagDataf.tagtoprint!; i++){
-        finalTagList.add(Tagfinaldata(collectdate: _tagdatamain.collectdate, branchname: 'San', receiptno: _tagdatamain.receiptno,
+        finalTagList.add(Tagfinaldata(collectdate: _tagdatamain.collectdate, branchname: 'S', receiptno: _tagdatamain.receiptno,
         mobileno: _tagdatamain.mobileno, totalitem: _tagdatamain.totalitem, servicelist: tagDataf.servicelist, note: tagDataf.note));
       }
     }
@@ -110,7 +109,7 @@ class _HomepageState extends State<Homepage> {
             return pw.Center(
               child: pw.Column(
                 children: [
-                  pw.Text('${tag.branchname}- ${tag.receiptno}', style: pw.TextStyle(fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                  pw.Text('${tag.branchname}- ${tag.receiptno}', style: pw.TextStyle(lineSpacing:1, fontSize: 14, fontWeight: pw.FontWeight.bold )),
                   pw.Row(
                     mainAxisSize: pw.MainAxisSize.max,
                       mainAxisAlignment: pw.MainAxisAlignment.center,
@@ -122,18 +121,18 @@ class _HomepageState extends State<Homepage> {
                             borderRadius: pw.BorderRadius.circular(8)
                           ),
                           child: pw.Text(
-                            tag.totalitem.toString(), style: pw.TextStyle(fontSize: 10, fontWeight: pw.FontWeight.bold),
+                            tag.totalitem.toString(), style: pw.TextStyle(lineSpacing:1, fontSize: 10, fontWeight: pw.FontWeight.bold),
                           ),
                         ),
                         pw.Padding(
                             padding: const pw.EdgeInsets.fromLTRB(4, 2, 4, 2)
                         ),
-                        pw.Text(tag.collectdate!, style: const pw.TextStyle(fontSize: 10)),
+                        pw.Text(tag.collectdate!, style: const pw.TextStyle(lineSpacing:1, fontSize: 10)),
                       ]
                   ),
-                  pw.Text(tag.mobileno.toString(), style: const pw.TextStyle(fontSize: 10)),
-                  pw.Text('${tag.servicelist} - ${tag.note}', style: const pw.TextStyle(fontSize: 10)),
-                  pw.Text('------------------------------------', style: const pw.TextStyle(fontSize: 8)),
+                  pw.Text(tag.mobileno.toString(), style: const pw.TextStyle(lineSpacing:1, fontSize: 10)),
+                  pw.Text('${tag.servicelist} - ${tag.note}', style: const pw.TextStyle(lineSpacing:1, fontSize: 10)),
+                  pw.Text('------------------------------------', style: const pw.TextStyle(lineSpacing:1, fontSize: 8)),
                 ],
               )
             );
@@ -205,7 +204,7 @@ class _HomepageState extends State<Homepage> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     inputFormatters: [
-                      LengthLimitingTextInputFormatter(5)
+                      LengthLimitingTextInputFormatter(4)
                     ],
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(label: Center(child: Text('Receipt Number'),),border: OutlineInputBorder()),
